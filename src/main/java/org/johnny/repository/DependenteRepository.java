@@ -50,10 +50,11 @@ public class DependenteRepository {
     }
 
     public void updateDependente(String cpf_dependente, Dependente dependente){
-        final String sql = "UPDATE dependente SET nome = ?, fk_funcionario_cpf = ? WHERE cpf_dependente = ?";
+        final String sql = "UPDATE dependente SET nome = ?,cpf_dependente = ? ,fk_funcionario_cpf = ? WHERE cpf_dependente = ?";
 
         jdbcTemplate.update(sql,
                 dependente.getNome(),
+                dependente.getCpf_dependente(),
                 dependente.getFk_funcionario_cpf(),
                 cpf_dependente);
     }

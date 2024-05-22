@@ -1,9 +1,9 @@
-package com.bd.crud.controller;
+package org.johnny.controllers;
 
 
-import com.bd.crud.exception.ProdutoNotFoundException;
-import com.bd.crud.model.Produto;
-import com.bd.crud.repository.ProdutoRepository;
+import org.johnny.excepitons.ProdutoNotFoundException;
+import org.johnny.models.Produto;
+import org.johnny.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

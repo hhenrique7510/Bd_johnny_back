@@ -1,4 +1,4 @@
-package com.bd.crud.exception;
+package org.johnny.excepitons;
 
 public class ProdutoNotFoundException extends RuntimeException{
     public ProdutoNotFoundException(int id){

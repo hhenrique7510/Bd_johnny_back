@@ -1,4 +1,4 @@
-package com.bd.crud.exception;
+package org.johnny.excepitons;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
