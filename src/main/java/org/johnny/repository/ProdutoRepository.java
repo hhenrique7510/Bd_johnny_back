@@ -1,6 +1,6 @@
-package com.bd.crud.repository;
+package org.johnny.repository;
 
-import com.bd.crud.model.Produto;
+import org.johnny.models.Produto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -58,4 +58,3 @@ public class ProdutoRepository {
         jdbcTemplate.update(sql, id_prod);
     }
 }
-mi

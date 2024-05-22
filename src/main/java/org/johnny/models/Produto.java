@@ -1,4 +1,4 @@
-package com.bd.crud.model;
+package org.johnny.models;
 
 public class Produto {
     private int id_prod; // Nome da coluna no banco de dados
