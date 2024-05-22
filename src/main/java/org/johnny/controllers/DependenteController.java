@@ -1,6 +1,5 @@
 package org.johnny.controllers;
 
-import org.johnny.excepitons.DependenteNotFoundException;
 import org.johnny.models.Dependente;
 import org.johnny.repository.DependenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,12 +26,6 @@ public class DependenteController {
         return dependenteRepository.listDependente();
     }
 
-//    @GetMapping("/dependente/{cpf_dependente}")
-//    Dependente getDependenteByCpf(@PathVariable String cpf_dependente) {
-//        return dependenteRepository.findByCpfDependente(cpf_dependente)
-//                .orElseThrow(() -> new DependenteNotFoundException(cpf_dependente));
-//    }
-
     @GetMapping("/dependenteByFuncionario/{fk_funcionario_cpf}")
     public ResponseEntity<List<Dependente>> getDependentesByFuncionarioCpf(@PathVariable String fk_funcionario_cpf) {
         List<Dependente> dependentes = dependenteRepository.findByCpfFuncionario(fk_funcionario_cpf);
@@ -52,18 +45,11 @@ public class DependenteController {
         }
     }
 
-//    @PutMapping("/dependenteUpdate/{cpf_dependente}")
-//    public ResponseEntity<?> updateDependente(@RequestBody Dependente updatedDependente, @PathVariable String cpf_dependente) {
-//        return dependenteRepository.findByCpfDependente(cpf_dependente)
-//                .map(existingDependente -> {
-//                    // Supõe que a atualização sempre será bem-sucedida
-//                    Dependente updated = dependenteRepository.updateDependente(cpf_dependente, updatedDependente);
-//                    if (updated == null) {
-//                        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Falha ao atualizar o funcionário.");
-//                    }
-//                    return ResponseEntity.ok(updated);
-//                })
-//                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuário com CPF " + cpf_dependente + " não encontrado para atualização.\n"));
-//    }
+
+    @PutMapping("dependenteUpdate/{cpf_dependente}")
+    public String editDependente(@PathVariable String cpf_dependente, @RequestBody Dependente newDependente){
+        dependenteRepository.updateDependente(cpf_dependente, newDependente);
+        return "Dependente editado";
+    }
 }
 

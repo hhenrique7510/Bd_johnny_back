@@ -60,8 +60,6 @@ public class FuncionarioRepository {
         return funcionario;
     }
 
-
-
     public List<Funcionario> listFuncionario() {
         String sql = "SELECT * FROM funcionario";
         return jdbcTemplate.query(sql, rowMapper);

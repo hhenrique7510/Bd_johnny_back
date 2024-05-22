@@ -1,7 +1,6 @@
 package org.johnny.repository;
 
 import org.johnny.models.Dependente;
-import org.johnny.models.Funcionario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -10,7 +9,6 @@ import org.springframework.stereotype.Repository;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public class DependenteRepository {
@@ -49,6 +47,15 @@ public class DependenteRepository {
     public boolean deleteDependeteByCpf(String cpf_dependente) {
         int rowsAffected = jdbcTemplate.update("DELETE FROM dependente WHERE cpf_dependente= ?", cpf_dependente);
         return rowsAffected > 0; // Retorna true se pelo menos uma linha foi afetada (funcionário excluído)
+    }
+
+    public void updateDependente(String cpf_dependente, Dependente dependente){
+        final String sql = "UPDATE dependente SET nome = ?, fk_funcionario_cpf = ? WHERE cpf_dependente = ?";
+
+        jdbcTemplate.update(sql,
+                dependente.getNome(),
+                dependente.getFk_funcionario_cpf(),
+                cpf_dependente);
     }
 
 
