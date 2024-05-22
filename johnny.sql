@@ -21,8 +21,7 @@ CREATE TABLE dependente (
     nome VARCHAR(200) NOT NULL,
     cpf_dependente VARCHAR(14) NOT NULL,
     fk_funcionario_cpf VARCHAR(14) NOT NULL,
-    data_nascimento DATE NOT NULL,
-    sexo CHAR(1) NOT NULL,  -- Especificado tipo CHAR, presumindo 'M' ou 'F'
+    data_nascimento DATE,
     
     CONSTRAINT dependente_pk PRIMARY KEY (cpf_dependente),  -- Definida chave primária
     CONSTRAINT fk_funcionario_dependente FOREIGN KEY (fk_funcionario_cpf) REFERENCES funcionario (cpf)
