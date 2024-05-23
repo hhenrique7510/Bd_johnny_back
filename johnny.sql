@@ -46,8 +46,8 @@ CREATE TABLE garcom (
 
 
 CREATE TABLE pedido (
-    id_pedido INT NOT NULL,
-    hora TIME NOT NULL,
+    id_pedido INT auto_increment,
+    data_hora DATETIME default NOW(),
     
     CONSTRAINT pedido_pk PRIMARY KEY (id_pedido)
 );
@@ -60,7 +60,7 @@ CREATE TABLE nutricionista (
 );
 
 CREATE TABLE produtos (
-    id_prod INT NOT NULL,
+    id_prod INT auto_increment,
     nome VARCHAR(200) NOT NULL,
     valor FLOAT NOT NULL,
     produtos_tipo VARCHAR(100)NOT NULL,
@@ -134,7 +134,7 @@ VALUES ('123456789', 5000.00, '11987654321', 'João Silva', 'senha123', 'joao@ex
 
 -- Inserindo um garçom
 INSERT INTO garcom (fk_funcionario_cpf)
-VALUES ('12345678901');
+VALUES ('109.055.154-12');
 
 -- Inserindo uma mesa
 INSERT INTO mesa (id_mesa)
@@ -157,6 +157,13 @@ VALUES ('12345678901', 1, 2);
 insert into garcom (fk_funcionario_cpf,fk_gerente_cpf)
 values ('123456789',null)
 
+INSERT INTO produtos (id_prod, nome, valor, produtos_tipo, fk_nutricionista_cpf)
+VALUES
+(1, 'Proteína Whey', 199.99, 'Suplemento', NULL),
+(2, 'Barra de Cereal', 3.50, 'Snack', NULL),
+(3, 'Multivitaminas', 59.90, 'Suplemento', NULL);
+
+
 update garcom
 set fk_gerente_cpf = null 
 where fk_funcionario_cpf = '123456789';
@@ -173,5 +180,11 @@ values ('1234567890',null)
 
 insert into garcom (fk_funcionario_cpf,fk_gerente_cpf)
 values ('123456789',null)
+
+insert into mesa (id_mesa)
+values ('1')
+
+INSERT INTO mesa () VALUES ();
+
 
 DELETE FROM garcom;
