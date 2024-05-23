@@ -1,5 +1,7 @@
 package org.johnny.controllers;
 
+import org.johnny.models.Dependente;
+import org.johnny.models.Mesa;
 import org.johnny.models.Pedido;
 import org.johnny.repository.PedidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +42,5 @@ public class PedidoController {
         pedidoRepository.update(id_pedido, newPedido);
         return "Pedio " + id_pedido + " editado";
     }
-
 
 }
