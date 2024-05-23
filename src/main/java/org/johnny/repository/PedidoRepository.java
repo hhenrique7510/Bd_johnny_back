@@ -51,7 +51,7 @@ public class PedidoRepository {
     }
 
     public void update(int id_pedido, Pedido pedido){
-        final String sql = "update pedido set id_pedido = ?, data_hora = ?, where id_pedido = ?";
+        final String sql = "update pedido set id_pedido = ?, data_hora = ? where id_pedido = ?";
 
         jdbcTemplate.update(sql,
                 pedido.getId_pedido(),
