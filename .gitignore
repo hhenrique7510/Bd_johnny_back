@@ -36,3 +36,6 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+### Ignorando o application.properties ###
+Bd_johnny_back/src/main/resources/application.properties
