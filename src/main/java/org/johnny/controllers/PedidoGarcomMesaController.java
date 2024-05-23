@@ -32,7 +32,7 @@ public class PedidoGarcomMesaController {
     }
 
     @GetMapping("/pedido_garcom_mesas")//busca
-    public List<PedidoGarcomMesa> getAllProdutoLoja(){
+    public List<PedidoGarcomMesa> getAllPedidoGarcom(){
         return pedidoGarcomMesaRepository.findAll();
     }
 
@@ -40,7 +40,5 @@ public class PedidoGarcomMesaController {
     public PedidoGarcomMesa getPedidoGarcomMesa(@PathVariable String fk_funcionario_cpf, @PathVariable int fk_mesa_id_mesa, @PathVariable int fk_pedido_id_pedido){
         return pedidoGarcomMesaRepository.findPedidoGarcomMesa(fk_funcionario_cpf, fk_mesa_id_mesa, fk_pedido_id_pedido);
     }
-
-
 
 }
