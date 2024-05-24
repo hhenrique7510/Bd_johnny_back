@@ -5,8 +5,11 @@ import org.johnny.models.Pedido;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
+import java.sql.PreparedStatement;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -26,10 +29,17 @@ public class PedidoRepository {
         return pedido;
     };
 
-    public void insert(Pedido pedido){
-        final String sql = "insert into pedido () values ()";
+    public int insert() {
+        final String sql = "INSERT INTO pedido () VALUES ()";
 
-        jdbcTemplate.update(sql);
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+
+        jdbcTemplate.update(connection -> {
+            PreparedStatement ps = connection.prepareStatement(sql, new String[] {"id_pedido"});
+            return ps;
+        }, keyHolder);
+
+        return keyHolder.getKey().intValue();
     }
 
     public List<Pedido> findAll(){

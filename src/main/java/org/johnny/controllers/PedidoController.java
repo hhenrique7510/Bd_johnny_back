@@ -1,7 +1,5 @@
 package org.johnny.controllers;
 
-import org.johnny.models.Dependente;
-import org.johnny.models.Mesa;
 import org.johnny.models.Pedido;
 import org.johnny.repository.PedidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +15,8 @@ public class PedidoController {
     private PedidoRepository pedidoRepository;
 
     @PostMapping("/pedido")
-    public String newPedido(@RequestBody Pedido newPedido){
-        pedidoRepository.insert(newPedido);
-        return  "Pedido criado";
+    public int newPedido(){
+        return pedidoRepository.insert();
     }
 
     @GetMapping("/pedidos")
