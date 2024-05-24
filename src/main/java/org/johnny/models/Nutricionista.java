@@ -18,4 +18,3 @@ public class Nutricionista {
         this.fk_funcionario_cpf = fk_funcionario_cpf;
     }
 }
-
