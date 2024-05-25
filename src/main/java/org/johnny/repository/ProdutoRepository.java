@@ -57,4 +57,10 @@ public class ProdutoRepository {
         String sql = "DELETE FROM produtos WHERE id_prod = ?";
         jdbcTemplate.update(sql, id_prod);
     }
+
+    public List<Produto> findProdutosByIds(List<Integer> produtoIds) {
+        String sql = "SELECT * FROM produtos WHERE id_prod IN (" +
+                String.join(",", produtoIds.stream().map(String::valueOf).toArray(String[]::new)) + ")";
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Produto.class));
+    }
 }

@@ -42,4 +42,10 @@ public class PedidoGarcomMesaController {
         return pedidoGarcomMesaRepository.findPedidoGarcomMesa(fk_funcionario_cpf, fk_mesa_id_mesa, fk_pedido_id_pedido);
     }
 
+    @GetMapping("/pedido_garcom_mesa/mesa/{fk_mesa_id_mesa}/abertos")
+    public List<PedidoGarcomMesa> getPedidosAbertosByMesa(@PathVariable int fk_mesa_id_mesa) {
+        return pedidoGarcomMesaRepository.findPedidosAbertosByMesa(fk_mesa_id_mesa);
+    }
+
+
 }

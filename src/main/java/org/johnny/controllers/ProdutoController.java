@@ -55,4 +55,9 @@ public class ProdutoController {
             throw new ProdutoNotFoundException(id_prod);
         }
     }
+
+    @PostMapping("/produtos/byIds")
+    public List<Produto> getProdutosByIds(@RequestBody List<Integer> produtoIds) {
+        return produtoRepository.findProdutosByIds(produtoIds);
+    }
 }

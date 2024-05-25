@@ -4,6 +4,8 @@ import org.johnny.models.PedidoProduto;
 import org.johnny.repository.PedidoProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 import java.util.List;
 
@@ -41,6 +43,12 @@ public class PedidoProdutoController {
     public PedidoProduto getPedidoProduto(@PathVariable int fk_produtos_id_prod, @PathVariable int fk_pedido_id_pedido){
         return pedidoProdutoRepository.findPedidoProduto(fk_produtos_id_prod, fk_pedido_id_pedido);
     }
+
+    @PostMapping("/pedido_produto/pedidos")
+    public List<PedidoProduto> getPedidoProdutosByPedidoIds(@RequestBody List<Integer> pedidoIds) {
+        return pedidoProdutoRepository.findPedidoProdutosByPedidoIds(pedidoIds);
+    }
+
 
 
 }

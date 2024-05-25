@@ -51,4 +51,12 @@ public class PedidoGarcomMesaRepository {
         final String sql = "select * from faz where (fk_funcionario_cpf = ?) and (fk_mesa_id_mesa = ?) and (fk_pedido_id_pedido = ?)";
         return jdbcTemplate.queryForObject(sql, PedidoGarcomMesaMapper, fk_funcionario_cpf,fk_mesa_id_mesa, fk_pedido_id_pedido);
     }
+
+    public List<PedidoGarcomMesa> findPedidosAbertosByMesa(int fk_mesa_id_mesa){
+        final String sql = "select * from faz where fk_mesa_id_mesa = ? and status = 'aberto'";
+        return jdbcTemplate.query(sql, PedidoGarcomMesaMapper, fk_mesa_id_mesa);
+    }
+
+
+
 }

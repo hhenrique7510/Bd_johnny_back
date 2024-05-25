@@ -51,7 +51,12 @@ public class PedidoProdutoRepository {
         return jdbcTemplate.queryForObject(sql, PedidoProdutoMapper, fk_produtos_id_prod,fk_pedido_id_pedido);
     }
 
-
+    public List<PedidoProduto> findPedidoProdutosByPedidoIds(List<Integer> pedidoIds) {
+        String sql = "select * from tem where fk_pedido_id_pedido in (" +
+                String.join(",", pedidoIds.stream().map(String::valueOf).toArray(String[]::new)) +
+                ") order by fk_produtos_id_prod";
+        return jdbcTemplate.query(sql, PedidoProdutoMapper);
+    }
 
 
 }
