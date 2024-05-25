@@ -47,5 +47,9 @@ public class PedidoGarcomMesaController {
         return pedidoGarcomMesaRepository.findPedidosAbertosByMesa(fk_mesa_id_mesa);
     }
 
-
+    @PutMapping("/pedido_garcom_mesa/fechar/{fk_mesa_id_mesa}")
+    public String fecharPedidos(@PathVariable int fk_mesa_id_mesa) {
+        pedidoGarcomMesaRepository.fecharPedidos(fk_mesa_id_mesa);
+        return "Pedidos fechados para a mesa " + fk_mesa_id_mesa;
+    }
 }
