@@ -57,6 +57,8 @@ public class PedidoGarcomMesaRepository {
         return jdbcTemplate.query(sql, PedidoGarcomMesaMapper, fk_mesa_id_mesa);
     }
 
-
-
+    public void fecharPedidos(int fk_mesa_id_mesa) {
+        final String sql = "update faz set status = 'fechado' where fk_mesa_id_mesa = ?";
+        jdbcTemplate.update(sql, fk_mesa_id_mesa);
+    }
 }
