@@ -63,4 +63,5 @@ public class ProdutoRepository {
                 String.join(",", produtoIds.stream().map(String::valueOf).toArray(String[]::new)) + ")";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Produto.class));
     }
+    
 }
