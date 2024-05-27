@@ -65,7 +65,8 @@ public class GarcomController {
         return garcomRepository.findGerente();
     }
 
-
-
-
+    @GetMapping("/garcom/maisPontos")
+    public Garcom getGarcomComMaisPontos() {
+        return garcomRepository.findGarcomComMaisPontos();
+    }
 }

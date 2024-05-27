@@ -74,4 +74,11 @@ public class GarcomRepository {
         return result.isEmpty() ? null : result.get(0);
     }
 
+    public Garcom findGarcomComMaisPontos() {
+        final String sql = "SELECT * FROM garcom ORDER BY pontos DESC LIMIT 1";
+        List<Garcom> result = jdbcTemplate.query(sql, GarcomMapper);
+        return result.isEmpty() ? null : result.get(0);
+    }
+
+
 }
