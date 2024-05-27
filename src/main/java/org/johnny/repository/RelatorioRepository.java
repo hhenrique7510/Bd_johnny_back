@@ -26,15 +26,16 @@ public class RelatorioRepository {
 
     public List<Relatorio> findRelatorios() {
         final String sql = "SELECT p.id_pedido, p.data_hora, faz.fk_mesa_id_mesa AS mesa, " +
-                "SUM(t.qtd_produto * prod.valor) AS valor_total, " +
-                "COALESCE(f.nome, gh.nome) AS garcom " + // COALESCE para priorizar o nome do funcionário ativo
+                "SUM(t.qtd_produto * ph.valor) AS valor_total, " +
+                "gh.nome AS garcom " +
                 "FROM pedido p " +
                 "JOIN faz ON p.id_pedido = faz.fk_pedido_id_pedido " +
                 "JOIN tem t ON p.id_pedido = t.fk_pedido_id_pedido " +
-                "JOIN produtos prod ON t.fk_produtos_id_prod = prod.id_prod " +
-                "LEFT JOIN funcionario f ON faz.fk_funcionario_cpf = f.cpf " +
-                "LEFT JOIN garcom_historico gh ON faz.fk_pedido_id_pedido = gh.id_pedido " + // JOIN com garcom_historico pelo id_pedido
-                "GROUP BY p.id_pedido, p.data_hora, faz.fk_mesa_id_mesa, COALESCE(f.nome, gh.nome)";
+                "JOIN produtos_historico ph ON t.fk_produtos_id_prod = ph.id_prod AND p.id_pedido = ph.id_pedido " + // JOIN usando id_pedido
+                "JOIN garcom_historico gh ON faz.fk_pedido_id_pedido = gh.id_pedido " +
+                "WHERE faz.status = 'fechado' " +
+                "GROUP BY p.id_pedido, p.data_hora, faz.fk_mesa_id_mesa, gh.nome";
+
         return jdbcTemplate.query(sql, relatorioMapper);
     }
 
