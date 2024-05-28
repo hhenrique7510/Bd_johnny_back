@@ -31,7 +31,7 @@ public class RelatorioRepository {
                 "FROM pedido p " +
                 "JOIN faz ON p.id_pedido = faz.fk_pedido_id_pedido " +
                 "JOIN tem t ON p.id_pedido = t.fk_pedido_id_pedido " +
-                "JOIN produtos_historico ph ON t.fk_produtos_id_prod = ph.id_prod AND p.id_pedido = ph.id_pedido " + // JOIN usando id_pedido
+                "JOIN produtos_historico ph ON t.fk_produtos_id_prod = ph.id_prod AND p.id_pedido = ph.id_pedido " +
                 "JOIN garcom_historico gh ON faz.fk_pedido_id_pedido = gh.id_pedido " +
                 "WHERE faz.status = 'fechado' " +
                 "GROUP BY p.id_pedido, p.data_hora, faz.fk_mesa_id_mesa, gh.nome";
