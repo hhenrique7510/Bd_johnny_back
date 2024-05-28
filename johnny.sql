@@ -23,9 +23,9 @@ CREATE TABLE dependente (
     fk_funcionario_cpf VARCHAR(14) NOT NULL,
     data_nascimento DATE,
     
-    CONSTRAINT dependente_pk PRIMARY KEY (cpf_dependente),  -- Definida chave primária
+    CONSTRAINT dependente_pk PRIMARY KEY (cpf_dependente), 
     CONSTRAINT fk_funcionario_dependente FOREIGN KEY (fk_funcionario_cpf) REFERENCES funcionario (cpf)
-        ON DELETE CASCADE  -- Definida ação de CASCADE para a exclusão de funcionários
+        ON DELETE CASCADE  
 );
 
 CREATE TABLE mesa (
@@ -35,13 +35,13 @@ CREATE TABLE mesa (
 
 CREATE TABLE garcom (
     fk_funcionario_cpf VARCHAR(14) NOT NULL,
-    fk_gerente_cpf VARCHAR(14),  -- Chave estrangeira para indicar o garçom que gerencia este garçom
+    fk_gerente_cpf VARCHAR(14), 
     pontos INT default 0,
     CONSTRAINT garcom_pk PRIMARY KEY (fk_funcionario_cpf),
     CONSTRAINT fk_garcom_funcionario FOREIGN KEY (fk_funcionario_cpf) REFERENCES funcionario (cpf)
         ON DELETE CASCADE,
     CONSTRAINT fk_garcom_gerente FOREIGN KEY (fk_gerente_cpf) REFERENCES garcom (fk_funcionario_cpf)
-        ON DELETE SET NULL  -- Ação opcional, dependendo das regras de negócio
+        ON DELETE SET NULL  
 );
 
 CREATE TABLE pedido (
@@ -137,7 +137,7 @@ CREATE TABLE garcom_historico (
     fk_gerente_cpf VARCHAR(14),
     pontos INT,
     nome VARCHAR(200) NOT NULL,
-    id_pedido INT, -- Nova coluna para armazenar o ID do pedido
+    id_pedido INT, 
     data_exclusao DATETIME DEFAULT NOW()
 );
 
@@ -149,7 +149,7 @@ CREATE TABLE produtos_historico (
     produtos_tipo VARCHAR(100),
     fk_nutricionista_cpf VARCHAR(14),
     data_hora DATETIME DEFAULT NOW(),
-    id_pedido INT -- Nova coluna para armazenar o ID do pedido
+    id_pedido INT 
 );
 
 
@@ -169,15 +169,14 @@ CREATE TRIGGER pedido_fechado
 AFTER UPDATE ON faz
 FOR EACH ROW
 BEGIN
-    IF NEW.status = 'fechado' AND OLD.status != 'fechado' THEN -- Verifica se o status mudou de algo diferente de "fechado" para "fechado"
-        -- Insere os dados do garçom no histórico
+    IF NEW.status = 'fechado' AND OLD.status != 'fechado' THEN 
+       
         INSERT INTO garcom_historico (fk_funcionario_cpf, fk_gerente_cpf, pontos, nome, id_pedido)
         SELECT g.fk_funcionario_cpf, g.fk_gerente_cpf, g.pontos, f.nome, NEW.fk_pedido_id_pedido
         FROM garcom g
         JOIN funcionario f ON g.fk_funcionario_cpf = f.cpf
         WHERE g.fk_funcionario_cpf = NEW.fk_funcionario_cpf;
 
-        -- Insere os dados dos produtos no histórico
         INSERT INTO produtos_historico (id_prod, nome, valor, produtos_tipo, fk_nutricionista_cpf, id_pedido)
         SELECT t.fk_produtos_id_prod, p.nome, p.valor, p.produtos_tipo, p.fk_nutricionista_cpf, NEW.fk_pedido_id_pedido
         FROM tem t
